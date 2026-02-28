@@ -1,0 +1,150 @@
+{
+  "design_system": {
+    "typography": {
+      "font_family": {
+        "primary": "Cantarell, Ubuntu, 'Segoe UI', sans-serif",
+        "monospace": "'Source Code Pro', 'Ubuntu Mono', monospace"
+      },
+      "scale": {
+        "xs": "0.75rem",
+        "sm": "0.875rem",
+        "base": "1rem",
+        "lg": "1.125rem",
+        "xl": "1.25rem",
+        "2xl": "1.5rem",
+        "3xl": "1.875rem"
+      },
+      "weights": {
+        "regular": 400,
+        "medium": 500,
+        "bold": 700
+      }
+    },
+    "colors": {
+      "palette": {
+        "background": "#1e1e1e",
+        "surface": "#242424",
+        "surface_highlight": "#353535",
+        "border": "rgba(255, 255, 255, 0.12)",
+        "primary": "#3584e4",
+        "primary_hover": "#1c71d8",
+        "danger": "#e01b24",
+        "danger_hover": "#c01c28",
+        "success": "#26a269",
+        "warning": "#f8e45c",
+        "text": {
+          "primary": "#ffffff",
+          "secondary": "#9a9996",
+          "muted": "#5e5c64"
+        }
+      },
+      "semantic": {
+        "window_bg": "#242424",
+        "header_bg": "#303030",
+        "selection": "#3584e4",
+        "terminal": {
+          "bg": "#1e1e1e",
+          "fg": "#ffffff",
+          "cursor": "#cccccc"
+        }
+      }
+    },
+    "spacing": {
+      "xs": "4px",
+      "sm": "8px",
+      "md": "16px",
+      "lg": "24px",
+      "xl": "32px",
+      "xxl": "48px"
+    },
+    "shadows": {
+      "window": "0 10px 30px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05)",
+      "panel": "0 2px 8px rgba(0, 0, 0, 0.3)",
+      "tooltip": "0 4px 12px rgba(0, 0, 0, 0.4)"
+    },
+    "radius": {
+      "sm": "4px",
+      "md": "8px",
+      "lg": "12px",
+      "xl": "16px",
+      "full": "9999px"
+    },
+    "z_index": {
+      "desktop": 0,
+      "window_base": 10,
+      "window_active": 50,
+      "dock": 100,
+      "panel": 110,
+      "overlay": 200,
+      "modal": 300,
+      "tooltip": 400,
+      "context_menu": 500
+    }
+  },
+  "components": {
+    "Window": {
+      "bg": "bg-[#242424]",
+      "border": "border border-white/10",
+      "radius": "rounded-xl",
+      "shadow": "shadow-2xl",
+      "header": {
+        "height": "h-10",
+        "bg": "bg-[#303030]",
+        "title_align": "center",
+        "controls": "flex gap-2 items-center"
+      }
+    },
+    "Taskbar": {
+      "position": "fixed bottom-4 left-1/2 -translate-x-1/2",
+      "bg": "bg-[#1e1e1e]/90 backdrop-blur-md",
+      "radius": "rounded-full",
+      "padding": "px-4 py-2",
+      "border": "border border-white/5",
+      "item_hover": "hover:bg-white/10"
+    },
+    "TopPanel": {
+      "height": "h-8",
+      "bg": "bg-[#1e1e1e]",
+      "text": "text-sm font-medium",
+      "shadow": "shadow-sm"
+    }
+  },
+  "assets": {
+    "wallpaper": {
+      "url": "https://images.unsplash.com/photo-1771793079119-741d01efc71a?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzNTl8MHwxfHNlYXJjaHwyfHxhYnN0cmFjdCUyMGVtZXJhbGQlMjBncmVlbiUyMGRpZ2l0YWwlMjB3YXZlcyUyMGRhcmslMjB3YWxscGFwZXIlMjA0a3xlbnwwfHx8fDE3NzIxNDQ5NDV8MA&ixlib=rb-4.1.0&q=85",
+      "alt": "Debian Emerald Abstract"
+    },
+    "icons": {
+      "terminal": "SquareTerminal",
+      "files": "Folder",
+      "browser": "Globe",
+      "text_editor": "FileText",
+      "calculator": "Calculator",
+      "notes": "StickyNote",
+      "settings": "Settings",
+      "software_center": "ShoppingBag",
+      "image_viewer": "Image",
+      "system_monitor": "Activity",
+      "clock": "Clock"
+    }
+  },
+  "instructions_to_main_agent": [
+    "1. THEME: Strict Dark Mode. No light mode toggle. Use #1e1e1e as the absolute base.",
+    "2. FONT: Import 'Cantarell' from Google Fonts in index.css. Fallback to system-ui.",
+    "3. WINDOW ENGINE: Use `framer-motion` for drag/resize. Store window state (x, y, w, h, zIndex, minimized) in a Zustand store.",
+    "4. PERSISTENCE: Use `idb-keyval` or standard IndexedDB for the 'Filesystem'. Persist window positions and open apps to localStorage.",
+    "5. TERMINAL: Implement a command parser that supports pipes (|) and standard commands. Visuals must match GNOME Terminal (Solarized Dark or Tango Dark).",
+    "6. FILESYSTEM: Virtual file system must support hierarchy (folders, files). Initial state should have /home/user/Documents, /home/user/Downloads.",
+    "7. BROWSER SANDBOX: Use an iframe for the 'Web Browser' app to isolate it. Allow entering URLs.",
+    "8. LOGIN: Simple overlay before the desktop mounts. Hardcoded user 'debian' / 'password'.",
+    "9. ANIMATIONS: Windows must pop in (scale 0.95 -> 1) and fade out. Taskbar tooltips must be instant but smooth.",
+    "10. CONTEXT MENU: Right-clicking the desktop must show 'New Folder', 'Change Background', 'Settings'.",
+    "11. COMPONENT REUSE: heavily customize Shadcn components (Dialog, ContextMenu, Slider) to remove the 'Vercel' look and apply the Adwaita/GNOME look."
+  ],
+  "universal_guidelines": [
+    "Do not use generic gradients. Use flat, deep colors with subtle 1px borders for depth.",
+    "Text must be legible. Use text-white/90 for primary text, text-white/60 for secondary.",
+    "Avoid 'Inter' font if possible. Use 'Cantarell' or 'Ubuntu' for Linux authenticity.",
+    "All interactive elements must have `data-testid` attributes."
+  ]
+}
